@@ -1,0 +1,29 @@
+#macro(pagination $page $url)
+	<nav class="col-xs-12 page">
+	  <ul class="pagination">
+	  #if($page.pageNum ==1)
+	    <li class="disabled"><a href="#">&laquo;</a></li>
+	  #else
+	  	#set($pre=$page.pageNum - 1)
+	    <li><a href="#springUrl($url)?pageNum=$pre">&laquo;</a></li>
+	  #end
+	  
+	  #set($range = $page.pages)
+	  #foreach($num in [1..$range])
+	  	#if($num == $page.pageNum)
+	    <li class="active" ><a href="#springUrl($url)?pageNum=$num">$num</a></li>
+	    #else
+	    <li><a href="#springUrl($url)?pageNum=$num">$num</a></li>
+	   #end 
+	  #end
+	  
+	  #if($page.pageNum == $page.pages)
+	    <li class="disabled"><a href="#">&raquo;</a></li>
+	  #else
+	  	#set($next=$page.pageNum + 1)
+	    <li><a href="#springUrl($url)?pageNum=$next">&raquo;</a></li>
+	  #end
+	  </ul>
+	</nav>
+#end
+
